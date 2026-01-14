@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+set -uvx
+set -e
+cd "$(dirname "$0")"
+cs-gen JcCommon.main.cs
+cd build-JcCommon.main
+start JcCommon.main.csproj
