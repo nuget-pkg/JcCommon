@@ -2,6 +2,7 @@
 
 namespace JcCommon;
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -37,6 +38,10 @@ public static class CscsUtil
     }
     private static void ParseProjectHelper(string projFileName)
     {
+        string home = Environment.GetEnvironmentVariable("HOME");
+        if (home != null) {
+            projFileName = projFileName.Replace("$(HOME)", home);
+        }
         if (projFileName.StartsWith("$")) {
             if (!SrcList.Contains(projFileName))
                 SrcList.Add(projFileName);
@@ -57,6 +62,10 @@ public static class CscsUtil
             if (m.Success)
             {
                 string srcName = m.Groups[1].Value;
+                if (home != null)
+                {
+                    srcName = srcName.Replace("$(HOME)", home);
+                }
                 if (!srcName.StartsWith("$")) srcName = Path.GetFullPath(srcName);
                 ParseProjectHelper(srcName);
             }
