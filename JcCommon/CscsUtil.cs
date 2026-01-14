@@ -37,6 +37,11 @@ public static class CscsUtil
     }
     private static void ParseProjectHelper(string projFileName)
     {
+        if (projFileName.StartsWith("$")) {
+            if (!SrcList.Contains(projFileName))
+                SrcList.Add(projFileName);
+            return;
+        }
         projFileName = Path.GetFullPath(projFileName);
         if (!SrcList.Contains(projFileName))
             SrcList.Add(projFileName);
@@ -52,8 +57,7 @@ public static class CscsUtil
             if (m.Success)
             {
                 string srcName = m.Groups[1].Value;
-                if (srcName.StartsWith("$")) continue;
-                srcName = Path.GetFullPath(srcName);
+                if (!srcName.StartsWith("$")) srcName = Path.GetFullPath(srcName);
                 ParseProjectHelper(srcName);
             }
         }
