@@ -52,6 +52,7 @@ public static class CscsUtil
             if (m.Success)
             {
                 string srcName = m.Groups[1].Value;
+                if (srcName.StartsWith("$")) continue;
                 srcName = Path.GetFullPath(srcName);
                 ParseProjectHelper(srcName);
             }

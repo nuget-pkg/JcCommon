@@ -9,6 +9,7 @@ class Program
 {
     static void Main()
     {
-        //Console.WriteLine(JcCommon.Add2(11, 22));
+        JcCommon.CscsUtil.ParseProject(@"D:/home12/cs/common-test/Program.cs");
+        JcCommon.CscsUtil.DebugDump();
    }
 }
