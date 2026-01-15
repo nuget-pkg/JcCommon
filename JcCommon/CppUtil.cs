@@ -73,7 +73,6 @@ public static class CppUtil
                 if (m.Success)
                 {
                     string srcName = m.Groups[1].Value;
-                    //srcName = Path.GetFullPath(srcName);
                     ParseProjectHelper(srcName, false);
                 }
             }

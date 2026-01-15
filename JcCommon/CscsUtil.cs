@@ -24,6 +24,15 @@ public static class CscsUtil
         Log(ResList, "ResList");
         Log(DllList, "DllList");
     }
+    private static string AdjustPath(string path)
+    {
+        string? home = Environment.GetEnvironmentVariable("HOME");
+        if (home != null)
+        {
+            path = path.Replace(home + @"\", @"$(HOME)\");
+        }
+        return path;
+    }
     public static void ParseProject(string projFileName)
     {
         string cwd = Directory.GetCurrentDirectory();
@@ -39,26 +48,33 @@ public static class CscsUtil
     private static void ParseProjectHelper(string projFileName)
     {
         string home = Environment.GetEnvironmentVariable("HOME");
-        if (home != null) {
+        if (home != null)
+        {
             projFileName = projFileName.Replace("$(HOME)", home);
         }
-        if (projFileName.StartsWith("$")) {
+        if (projFileName.StartsWith("$"))
+        {
             if (!SrcList.Contains(projFileName))
                 SrcList.Add(projFileName);
             return;
         }
         projFileName = Path.GetFullPath(projFileName);
-        if (!SrcList.Contains(projFileName))
-            SrcList.Add(projFileName);
+        if (!SrcList.Contains(projFileName) && !projFileName.Contains(@"\obj\"))
+        {
+            SrcList.Add(AdjustPath(projFileName));
+        }
         string projDir = Path.GetDirectoryName(projFileName);
         Directory.SetCurrentDirectory(projDir);
         string source = File.ReadAllText(projFileName);
         string[] lines = Sys.TextToLines(source).ToArray();
         for (int i = 0; i < lines.Length; i++)
         {
-            string pat = @"^//css_inc[ ]+([^ ;]+)[ ]*;?[ ]*";
-            Regex r = new Regex(pat);
-            Match m = r.Match(lines[i]);
+            string pat = null;
+            Regex r = null;
+            Match m = null;
+            pat = @"^//css_inc[ ]+([^ ;]+)[ ]*;?[ ]*";
+            r = new Regex(pat);
+            m = r.Match(lines[i]);
             if (m.Success)
             {
                 string srcName = m.Groups[1].Value;
@@ -66,9 +82,37 @@ public static class CscsUtil
                 {
                     srcName = srcName.Replace("$(HOME)", home);
                 }
-                if (!srcName.StartsWith("$")) srcName = Path.GetFullPath(srcName);
+                //if (!srcName.StartsWith("$")) srcName = Path.GetFullPath(srcName);
                 ParseProjectHelper(srcName);
             }
+            pat = @"^//css_dir[ ]+([^ ;]+)[ ]*;?[ ]*";
+            r = new Regex(pat);
+            m = r.Match(lines[i]);
+            if (m.Success)
+            {
+                string dirName = m.Groups[1].Value;
+                if (home != null)
+                {
+                    dirName = dirName.Replace("$(HOME)", home);
+                }
+                //if (!dirName.StartsWith("$")) dirName = Path.GetFullPath(dirName);
+                //ParseProjectHelper(dirName);
+                SearchinDirectory(dirName);
+            }
+        }
+    }
+    private static void SearchinDirectory(string dirName)
+    {
+        string home = Environment.GetEnvironmentVariable("HOME");
+        if (home != null)
+        {
+            dirName = dirName.Replace("$(HOME)", home);
+        }
+        dirName = Path.GetFullPath(dirName);
+        string[] files = Directory.GetFiles(dirName, "*.cs", SearchOption.AllDirectories);
+        foreach (string file in files)
+        {
+            ParseProjectHelper(file);
         }
     }
     private static void ParseSource(string srcPath)

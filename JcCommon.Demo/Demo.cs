@@ -9,7 +9,7 @@ class Program
 {
     static void Main()
     {
-        JcCommon.CscsUtil.ParseProject(@"D:/home12/cs/common-test/Program.cs");
+        JcCommon.CscsUtil.ParseProject(@"D:/home12/cs/kill-child-auto/main.cs");
         JcCommon.CscsUtil.DebugDump();
    }
 }
