@@ -42,7 +42,9 @@ public static class CscsUtil
         for (int i = 0; i < SrcList.Count; i++)
         {
             string src = SrcList[i];
+            Console.WriteLine(src);
             ParseSource(src);
+            SrcList[i] = AdjustPath(src);
         }
     }
     private static void ParseProjectHelper(string projFileName)
@@ -61,7 +63,8 @@ public static class CscsUtil
         projFileName = Path.GetFullPath(projFileName);
         if (!SrcList.Contains(projFileName) && !projFileName.Contains(@"\obj\"))
         {
-            SrcList.Add(AdjustPath(projFileName));
+            //SrcList.Add(AdjustPath(projFileName));
+            SrcList.Add(projFileName);
         }
         string projDir = Path.GetDirectoryName(projFileName);
         Directory.SetCurrentDirectory(projDir);
