@@ -161,7 +161,16 @@ public static class CscsUtil
                 if (m.Success)
                 {
                     string resName = m.Groups[1].Value;
-                    resName = Path.GetFullPath(resName);
+                    string home = Environment.GetEnvironmentVariable("HOME");
+                    if (home != null)
+                    {
+                        resName = resName.Replace("$(HOME)", home);
+                    }
+                    if (!resName.StartsWith("$"))
+                    {
+                        resName = Path.GetFullPath(resName);
+                    }
+                    resName = AdjustPath(resName);
                     if (!ResList.Contains(resName))
                     {
                         ResList.Add(resName);
