@@ -1,4 +1,5 @@
-﻿namespace JcCommon;
+﻿/*
+namespace JcCommon;
 
 using System;
 using System.Collections.Generic;
@@ -202,3 +203,4 @@ public class JavaScript
         return EasyObject.FromObject(Call(name, vars));
     }
 }
+*/

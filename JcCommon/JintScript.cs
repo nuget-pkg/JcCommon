@@ -1,3 +1,4 @@
+/*
 namespace JcCommon;
 
 using Jint;
@@ -25,12 +26,6 @@ public class JintScript
             var appFile = _globals.appFile;
             var appDir = _globals.appDir;
             var $ns = importNamespace;
-            /*
-            function $ns(name)
-            {
-              return importNamespace(name);
-            }
-            */
             
             """);
         return engine;
@@ -59,3 +54,4 @@ internal class JintScriptGlobal
         return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
     }
 }
+*/
