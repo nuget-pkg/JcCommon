@@ -1,4 +1,4 @@
 #! /usr/bin/env bash
 set -uvx
 set -e
-start JcCommon.sln
+start devenv.exe JcCommon.sln

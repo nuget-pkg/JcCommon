@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<LangVersion>latest</LangVersion>
 		<TargetFrameworks>netstandard2.0;net462;net8.0</TargetFrameworks>
-		<Version>2026.0118.1329.25</Version>
+		<Version>2026.0118.1901.32</Version>
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<RootNamespace>JcCommon</RootNamespace>
@@ -20,7 +20,7 @@
 		<PackageProjectUrl>https://github.com/nuget-pkg/JcCommon</PackageProjectUrl>
 		<PackageTags>json;parser</PackageTags>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageReadmeFile>.\README.md</PackageReadmeFile>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
 		<UseWindowsForms>true</UseWindowsForms>
@@ -46,13 +46,13 @@
 		<Reference Include="System.Xml.Linq" />
 	</ItemGroup>
 	<ItemGroup>
-		<None Include="..\README.md" Pack="true" PackagePath="" />
+		<None Include=".\README.md" Pack="true" PackagePath="" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 		<PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="Global.Sys" Version="2026.118.1318.50" />
+	  <PackageReference Include="Global.Sys" Version="2026.118.1827.45" />
 	</ItemGroup>
 </Project>
