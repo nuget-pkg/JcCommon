@@ -35,6 +35,11 @@ public static class CscsUtil
     }
     public static void ParseProject(string projFileName)
     {
+        SrcList.Clear();
+        PkgList.Clear();
+        AsmList.Clear();
+        ResList.Clear();
+        DllList.Clear();
         string cwd = Directory.GetCurrentDirectory();
         projFileName = Path.GetFullPath(projFileName);
         ParseProjectHelper(projFileName);
