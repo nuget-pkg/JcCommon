@@ -35,11 +35,14 @@ public class CscsUtil
     }
     public void ParseProject(string projFileName)
     {
+        Log(projFileName, "CscsUtil.ParseProject()");
+#if false
         SrcList.Clear();
         PkgList.Clear();
         AsmList.Clear();
         ResList.Clear();
         DllList.Clear();
+#endif
         string cwd = Directory.GetCurrentDirectory();
         projFileName = Path.GetFullPath(projFileName);
         ParseProjectHelper(projFileName);
@@ -65,7 +68,7 @@ public class CscsUtil
             return;
         }
         projFileName = Path.GetFullPath(projFileName);
-        if (projFileName.Contains("+") || projFileName.Contains("@")) return;
+        if (projFileName.Contains("+")) return;
         if (!SrcList.Contains(projFileName) && !projFileName.Contains(@"\obj\"))
         {
             //SrcList.Add(AdjustPath(projFileName));

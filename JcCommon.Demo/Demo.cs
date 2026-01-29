@@ -17,6 +17,6 @@ class Program
         p1.DebugDump();
         JcCommon.CscsUtil p2 = new JcCommon.CscsUtil();
         p2.ParseProject(@"C:\ProgramData\home13\cs\examples@spectreconsole.github.com\single\Console.Figlet.cs");
-        p1.DebugDump();
+        p2.DebugDump();
     }
 }
