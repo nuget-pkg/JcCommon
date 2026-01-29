@@ -9,14 +9,14 @@ using System.Text.RegularExpressions;
 using Global;
 using static Global.EasyObject;
 
-public static class CscsUtil
+public class CscsUtil
 {
-    public static List<string> SrcList = new List<string> { };
-    public static List<string> PkgList = new List<string> { };
-    public static List<string> AsmList = new List<string> { };
-    public static List<string> ResList = new List<string> { };
-    public static List<string> DllList = new List<string> { };
-    public static void DebugDump()
+    public List<string> SrcList = new List<string> { };
+    public List<string> PkgList = new List<string> { };
+    public List<string> AsmList = new List<string> { };
+    public List<string> ResList = new List<string> { };
+    public List<string> DllList = new List<string> { };
+    public void DebugDump()
     {
         Log(SrcList, "SrcList");
         Log(PkgList, "PkgList");
@@ -24,7 +24,7 @@ public static class CscsUtil
         Log(ResList, "ResList");
         Log(DllList, "DllList");
     }
-    private static string AdjustPath(string path)
+    private string AdjustPath(string path)
     {
         string? home = Environment.GetEnvironmentVariable("HOME");
         if (home != null)
@@ -33,7 +33,7 @@ public static class CscsUtil
         }
         return path;
     }
-    public static void ParseProject(string projFileName)
+    public void ParseProject(string projFileName)
     {
         SrcList.Clear();
         PkgList.Clear();
@@ -51,7 +51,7 @@ public static class CscsUtil
             SrcList[i] = AdjustPath(src);
         }
     }
-    private static void ParseProjectHelper(string projFileName)
+    private void ParseProjectHelper(string projFileName)
     {
         string home = Environment.GetEnvironmentVariable("HOME");
         if (home != null)
@@ -109,7 +109,7 @@ public static class CscsUtil
             }
         }
     }
-    private static void SearchinDirectory(string dirName)
+    private void SearchinDirectory(string dirName)
     {
         string home = Environment.GetEnvironmentVariable("HOME");
         if (home != null)
@@ -124,7 +124,7 @@ public static class CscsUtil
             ParseProjectHelper(file);
         }
     }
-    private static void ParseSource(string srcPath)
+    private void ParseSource(string srcPath)
     {
         if (srcPath.StartsWith("$")) return;
         string source = File.ReadAllText(srcPath);
