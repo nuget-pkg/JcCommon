@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<LangVersion>latest</LangVersion>
 		<TargetFrameworks>netstandard2.0;net462;net8.0</TargetFrameworks>
-		<Version>2026.0129.1725.46</Version>
+		<Version>2026.0129.1740.49</Version>
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<RootNamespace>JcCommon</RootNamespace>
@@ -53,6 +53,6 @@
 		<PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="Global.Sys" Version="2026.118.1827.45" />
+	  <PackageReference Include="Global.Sys" Version="2026.126.1812.12" />
 	</ItemGroup>
 </Project>
