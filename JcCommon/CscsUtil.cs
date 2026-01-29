@@ -60,6 +60,7 @@ public static class CscsUtil
             return;
         }
         projFileName = Path.GetFullPath(projFileName);
+        if (projFileName.Contains("+") || projFileName.Contains("@")) return;
         if (!SrcList.Contains(projFileName) && !projFileName.Contains(@"\obj\"))
         {
             //SrcList.Add(AdjustPath(projFileName));
