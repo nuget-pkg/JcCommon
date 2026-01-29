@@ -42,7 +42,6 @@ public static class CscsUtil
         for (int i = 0; i < SrcList.Count; i++)
         {
             string src = SrcList[i];
-            Console.WriteLine(src);
             ParseSource(src);
             SrcList[i] = AdjustPath(src);
         }
@@ -115,6 +114,7 @@ public static class CscsUtil
         string[] files = Directory.GetFiles(dirName, "*.cs", SearchOption.AllDirectories);
         foreach (string file in files)
         {
+            if (SrcList.Contains(file)) continue;
             ParseProjectHelper(file);
         }
     }
